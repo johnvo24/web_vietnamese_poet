@@ -7,8 +7,8 @@ const page = () => {
   return (
     <div className='w-3/4 h-screen m-auto py-20'>
       <main className='w-full h-full flex bg-backgroundRegister bg-cover bg-bottom rounded-lg shadow-md'>
-        <div className='w-2/5 bg-white rounded-lg border border-[#d9d9d9] px-10 pt-14'>
-          <p className='text-3xl font-semibold mb-8'>Create account</p>
+        <div className='w-2/5 bg-white rounded-lg border border-[#d9d9d9] px-10 pt-10'>
+          <p className='text-3xl font-semibold mb-6'>Create account</p>
           <RegisterForm />
           <p className='mt-10 text-center'>
             Already have an account? 

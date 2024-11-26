@@ -6,8 +6,6 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { FaUser } from "react-icons/fa"
 import { TbPassword } from "react-icons/tb"
-import { MdEmail } from "react-icons/md"
-import { FaAddressCard } from "react-icons/fa"
 import {
   Form,
   FormControl,
@@ -19,11 +17,9 @@ import { Input } from "@/components/ui/input"
 import React from 'react'
 
 const formSchema = z.object({
-  fullname: z.string().max(100),
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }).max(16),
-  email: z.string().email(),
   password: z.string().min(6, {
     message: "Password must be at least 6 characters.",
   }).max(100),
@@ -31,12 +27,11 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>
 
-const RegisterForm = () => {
+const LoginForm = () => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
-      email: "",
       password: "",
     },
   })
@@ -47,19 +42,7 @@ const RegisterForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <FormField 
-          control={form.control}
-          name="fullname"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input placeholder="Enter fullname" icon={<FaAddressCard/>} {...field}/>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField 
           control={form.control}
           name="username"
@@ -67,18 +50,6 @@ const RegisterForm = () => {
             <FormItem>
               <FormControl>
                 <Input placeholder="Enter username" icon={<FaUser/>} {...field}/>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField 
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input placeholder="Enter email" icon={<MdEmail/>} {...field}/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -96,10 +67,10 @@ const RegisterForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">Create account</Button>
+        <Button type="submit" className="w-full">Login</Button>
       </form>
     </Form>
   )
 }
 
-export default RegisterForm
+export default LoginForm
