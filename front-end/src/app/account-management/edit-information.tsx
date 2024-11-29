@@ -10,8 +10,6 @@ import {
 import { Button } from '@/components/ui/button'
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
-import { MdEmail } from "react-icons/md"
-import { FaAddressCard } from "react-icons/fa"
 import React from 'react'
 import Image from "next/image"
 
@@ -35,7 +33,7 @@ const EditInformation = () => {
       </div>
       <hr className="my-8 w-3/4 border-dashed border-gray-300" />
 
-      <div className="w-3/4 space-y-4">
+      <div className="w-3/4 space-y-4 mb-6">
         <div className="flex items-center">
           <label className="w-1/3 font-semibold">Fullname:</label>
           <input
@@ -92,13 +90,9 @@ const EditInformation = () => {
         </div>
       </div>
 
-      <div className="mt-6">
-        <Button type="submit">Edit</Button>
-      </div>
-
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="outline">Edit Profile</Button>
+          <Button variant="default">Edit Profile</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>

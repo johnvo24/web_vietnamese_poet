@@ -48,7 +48,7 @@ const TabsAndEditForm = () => {
       </TabsContent>
       <TabsContent value="logout">
         <div className="flex h-full justify-center items-center">
-          <Button size='lg' type="submit">Logout</Button>
+          <Button size='lg' type="submit" variant="destructive">Logout</Button>
         </div>
       </TabsContent>
     </Tabs>
