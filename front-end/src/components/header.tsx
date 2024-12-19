@@ -5,7 +5,11 @@ import UserAvatar from "./ui/avatar";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineLogout, MdOutlineSettings } from "react-icons/md";
 
-export default function Header() {
+interface HeaderProps {
+  className?: string;
+}
+
+const Header: React.FC<HeaderProps> = ( { className } ) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null) // Add ref attribute to HTML Element
 
@@ -30,7 +34,7 @@ export default function Header() {
   }, [])
 
   return (
-    <div className="header flex w-full justify-between shadow-sm">
+    <div className={`${className} header flex w-full justify-between bg-background shadow-sm`}>
       <div className="logo_box w-24">
         <p className="logo-text h-full font-bold content-center text-lg text-center tracking-widest">VIPOE</p>
       </div>
@@ -55,7 +59,7 @@ export default function Header() {
         />
         {
           isDropdownVisible && (
-            <Menubar.Root 
+            <Menubar.Root
               ref={dropdownRef}
               className="absolute top-[44px] border w-48 shadow-lg rounded-md p-2 bg-white"
             >
@@ -80,3 +84,5 @@ export default function Header() {
     </div>
   )
 }
+
+export default Header;
