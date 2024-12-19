@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { api } from "@/lib/utils"
 import React from 'react'
 
 const formSchema = z.object({
@@ -36,8 +37,14 @@ const LoginForm = () => {
     },
   })
 
-  function onSubmit(values: FormValues) {
-    console.log(values)
+  async function onSubmit(values: FormValues) {
+    try {
+      const response = await api.post("/auth/login", values)
+      localStorage.setItem("token", response.data.access_token)
+      // go to Wall
+    } catch (error) {
+      alert("Registration failed!")
+    }
   }
 
   return (
