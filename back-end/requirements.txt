@@ -1,0 +1,4 @@
+sqlalchemy
+passlib
+python-jose
+pydantic[email]

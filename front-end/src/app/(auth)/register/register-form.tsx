@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { api } from "@/lib/utils"
 import React from 'react'
 
 const formSchema = z.object({
@@ -35,14 +36,20 @@ const RegisterForm = () => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      fullname: "",
       username: "",
       email: "",
       password: "",
     },
   })
 
-  function onSubmit(values: FormValues) {
-    console.log(values)
+  async function onSubmit(values: FormValues) {
+    try {
+      const response = await api.post("/auth/register", values)
+      alert("Registration successful!")
+    } catch (error) {
+      alert("Registration failed!")
+    }
   }
 
   return (
