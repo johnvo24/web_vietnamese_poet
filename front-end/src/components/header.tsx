@@ -4,6 +4,7 @@ import * as Menubar from '@radix-ui/react-menubar';
 import UserAvatar from "./ui/avatar";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineLogout, MdOutlineSettings } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 interface HeaderProps {
   className?: string;
@@ -12,6 +13,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ( { className } ) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null) // Add ref attribute to HTML Element
+  const router = useRouter()
 
   const toggleDropdown = () => {
     setIsDropdownVisible(prev => !prev);
@@ -41,10 +43,30 @@ const Header: React.FC<HeaderProps> = ( { className } ) => {
       <div className="menu_bar">
         <Menubar.Root className="flex p-1">
           <Menubar.Menu>
-            <Menubar.Trigger className="px-4 py-2 hover:bg-gray-100">Wall</Menubar.Trigger>
-            <Menubar.Trigger className="px-4 py-2 hover:bg-gray-100">Write</Menubar.Trigger>
-            <Menubar.Trigger className="px-4 py-2 hover:bg-gray-100">Collection</Menubar.Trigger>
-            <Menubar.Trigger className="px-4 py-2 hover:bg-gray-100">Support</Menubar.Trigger>
+            <Menubar.Trigger 
+              className="px-4 py-2 hover:bg-gray-100"
+              onClick={() => router.push('/')}
+              >
+                Wall
+            </Menubar.Trigger>
+            <Menubar.Trigger 
+              className="px-4 py-2 hover:bg-gray-100"
+              onClick={() => router.push('/write')}
+              >
+                Write
+            </Menubar.Trigger>
+            <Menubar.Trigger 
+              className="px-4 py-2 hover:bg-gray-100"
+              onClick={() => router.push('/collection')}
+              >
+                Collection
+            </Menubar.Trigger>
+            <Menubar.Trigger 
+              className="px-4 py-2 hover:bg-gray-100"
+              onClick={() => router.push('/support')}
+              >
+                Support
+            </Menubar.Trigger>
           </Menubar.Menu>
         </Menubar.Root>
       </div>
@@ -64,15 +86,24 @@ const Header: React.FC<HeaderProps> = ( { className } ) => {
               className="absolute top-[44px] border w-48 shadow-lg rounded-md p-2 bg-white"
             >
               <Menubar.Menu>
-                <Menubar.Trigger className="w-full inline-flex items-center text-start px-2 py-2 hover:bg-gray-100">
+                <Menubar.Trigger 
+                  className="w-full inline-flex items-center text-start px-2 py-2 hover:bg-gray-100"
+                  onClick={() => router.push('/profile')}
+                >
                   <FaRegUser size={18} className="mr-4"/>
                   Profile
                 </Menubar.Trigger>
-                <Menubar.Trigger className="w-full inline-flex items-center text-start px-2 py-2 hover:bg-gray-100">
+                <Menubar.Trigger 
+                  className="w-full inline-flex items-center text-start px-2 py-2 hover:bg-gray-100"
+                  onClick={() => router.push('/settings')}
+                >
                   <MdOutlineSettings size={22} className="mr-3.5 -ml-0.5"/>
                   Settings
                 </Menubar.Trigger>
-                <Menubar.Trigger className="w-full inline-flex items-center text-start px-2 py-2 hover:bg-gray-100">
+                <Menubar.Trigger 
+                  className="w-full inline-flex items-center text-start px-2 py-2 hover:bg-gray-100"
+                  onClick={() => router.push('/')}
+                >
                   <MdOutlineLogout size={22} className="mr-3"/>
                   Logout
                 </Menubar.Trigger>
