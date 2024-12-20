@@ -9,6 +9,12 @@ export default {
   ],
   theme: {
   	extend: {
+			fontSize: {
+				base: "16px",
+				sm: "14px",
+				lg: "18px",
+				xl: "20px",
+			},
 			backgroundImage: {
 				backgroundRegister: "url('/images/bg-img-register.jpg')",
 			},
