@@ -3,6 +3,7 @@
 import { HiOutlineViewfinderCircle } from "react-icons/hi2";
 import UserAvatar from "./avatar";
 import { useRouter } from "next/navigation";
+import { FaBookmark, FaShare, FaThumbsUp } from "react-icons/fa";
 
 const PostCard = ({className}:{className: string}) => {
   const router = useRouter();
@@ -53,8 +54,24 @@ const PostCard = ({className}:{className: string}) => {
         <p className="post-title text-xl font-bold mb-2">{poemData.title}</p>
         <p className="text-base whitespace-pre-wrap">{`${poemData.content}`}</p>
       </div>
-      <div className="interaction-box">
-        
+      <div className="interaction-box flex mt-2 rounded-lg border">
+        {/* Nút Like */}
+        <button className="action-btn flex flex-1 items-center justify-center space-x-2 hover:bg-gray-200 p-2 rounded-md">
+          <FaThumbsUp className="text-blue-500" size={20} />
+          <span className="text-gray-700 font-medium">120</span>
+        </button>
+
+        {/* Nút Save */}
+        <button className="action-btn flex flex-1 items-center justify-center space-x-2 hover:bg-gray-200 p-2 rounded-md">
+          <FaBookmark className="text-yellow-500" size={20} />
+          <span className="text-gray-700 font-medium">45</span>
+        </button>
+
+        {/* Nút Share */}
+        <button className="action-btn flex flex-1 items-center justify-center space-x-2 hover:bg-gray-200 p-2 rounded-md">
+          <FaShare className="text-green-500" size={20} />
+          <span className="text-gray-700 font-medium">30</span>
+        </button>
       </div>
     </div>
   )
