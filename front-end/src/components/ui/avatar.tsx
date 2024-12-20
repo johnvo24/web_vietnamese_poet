@@ -5,14 +5,16 @@ interface UserAvatarProps {
   src?: string;
   alt?: string;
   fallbackText: string;
+  id?: string;
   className?: string;
   onClick?: () => void;
 }
 
-const UserAvatar: React.FC<UserAvatarProps> = ({ src, alt, fallbackText, className , onClick}) => {
+const UserAvatar: React.FC<UserAvatarProps> = ({ src, alt, fallbackText, id, className , onClick}) => {
   return (
     <Avatar.Root 
-      className={`${className} inline-flex rounded-full w-10 h-10`}
+      id={id}
+      className={`avatar ${className} inline-flex rounded-full w-10 h-10`}
       onClick={onClick}
     >
       <Avatar.Image
