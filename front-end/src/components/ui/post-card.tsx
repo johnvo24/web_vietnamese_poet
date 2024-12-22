@@ -39,7 +39,7 @@ const PostCard = ({className}:{className: string}) => {
           </div>
         </div>
         <HiOutlineViewfinderCircle 
-          className="cursor-pointer rounded-lg hover:bg-gray-100"
+          className="cursor-pointer rounded-lg hover:bg-gray-200"
           size={36}
           onClick={() => router.push('/view')}
         />
@@ -61,14 +61,14 @@ const PostCard = ({className}:{className: string}) => {
         <button className="action-btn flex flex-1 items-center justify-center space-x-2 hover:bg-gray-200 p-2 rounded-md">
           <FaRegHeart className="text-gray-600" size={20} />
           {/* <FaHeart className="text-red-500" size={20} /> */}
-          <span className="w-20 text-start text-gray-700 font-medium">120</span>
+          <span className="w-16 text-start text-gray-700 font-medium">120</span>
         </button>
 
         {/* Nút Save */}
         <button className="action-btn flex flex-1 items-center justify-center space-x-2 hover:bg-gray-200 p-2 rounded-md">
           <FaRegBookmark className="text-gray-600" size={20} />
           {/* <FaBookmark className="text-yellow-500" size={20} /> */}
-          <span className="w-20 text-start text-gray-700 font-medium">45</span>
+          <span className="w-16 text-start text-gray-700 font-medium">45</span>
         </button>
 
         {/* Nút Share */}
