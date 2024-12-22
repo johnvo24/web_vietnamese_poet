@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text, ForeignKey, UniqueConstraint
 from sqlalchemy.sql import func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -42,7 +42,17 @@ class Poem(Base):
   title = Column(String(255), nullable=False)
   content = Column(Text, nullable=False)
   note = Column(Text, nullable=True)
-  create_at = Column(DateTime, default=func.now())
+  created_at = Column(DateTime, default=func.now())
 
   genre = relationship("Genre", back_populates="poems")
   user = relationship("User", back_populates="poems")
+
+class Collection(Base):
+  __tablename__ = "collections"
+  poem_id = Column(Integer, ForeignKey("poems.id"), primary_key=True)
+  user_id = Column(Integer, ForeignKey("users.id"), primary_key=True)
+
+  __table_args__ = (UniqueConstraint('poem_id', 'user_id', name='unique_collection'),)
+
+  poem = relationship("Poem", backref="collections")
+  user = relationship("User", backref="collections")
