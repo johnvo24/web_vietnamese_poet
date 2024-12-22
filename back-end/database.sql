@@ -39,3 +39,11 @@ CREATE TABLE poems (
     -- Thiết lập quan hệ với bảng Genres
     CONSTRAINT fk_genre FOREIGN KEY (genre_id) REFERENCES genres (id) ON DELETE SET NULL
 );
+
+-- Tạo bảng Collections
+CREATE TABLE collections (
+    poem_id INT REFERENCES poems(id) ON DELETE CASCADE,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    PRIMARY KEY (poem_id, user_id),
+    CONSTRAINT unique_collection UNIQUE (poem_id, user_id)
+);
