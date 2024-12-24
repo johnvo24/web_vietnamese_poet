@@ -40,6 +40,7 @@ class Poem(Base):
   genre_id = Column(Integer, ForeignKey("genres.id"), nullable=False)  # 0: lục bát, 1: thất ngôn tứ tuyệt
   prompt = Column(Text, nullable=False)
   title = Column(String(255), nullable=False)
+  image = Column(String(255), nullable=False)
   content = Column(Text, nullable=False)
   note = Column(Text, nullable=True)
   created_at = Column(DateTime, default=func.now())
