@@ -52,6 +52,6 @@ async def create_item(req: GeneratePoemRequest):
         content[i] = content[i].upper()
     content = "".join(content)
     print(content)
-    return {"content": content}
+    return {"title": "", "content": content}
   except Exception as e:
     raise HTTPException(status_code=500, detail=str(e))
