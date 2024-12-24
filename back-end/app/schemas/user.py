@@ -41,3 +41,11 @@ class LoginRequest(BaseModel):
 class TokenResponse(BaseModel):
   access_token: str
   token_type: str
+
+class ShowWriterResponse(BaseModel):
+  user_id: int
+  full_name: str
+  avatar: str
+
+  class Config:
+    from_attributes = True

@@ -31,6 +31,7 @@ CREATE TABLE poems (
     genre_id INT NOT NULL,
     prompt TEXT NOT NULL,
     title VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     note TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

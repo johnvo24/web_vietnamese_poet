@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models import Collection, User, Poem
-from app.schemas.collection import CollectionCreate
+from app.schemas.collection import CollectionCreate, CollectionResponse
 from app.auth.dependencies import get_current_user
 
 router = APIRouter()
@@ -36,3 +36,83 @@ def add_to_collection(
   db.add(new_item)
   db.commit()
   return {"message": "Poem added to collection successfully"}
+
+@router.get("/getById", response_model=list[CollectionResponse])
+async def get_poem_in_collections(
+  db: Session = Depends(get_db),
+  current_user: User = Depends(get_current_user)
+):
+  collections = (
+    db.query(
+      Poem.id.label("poem_id"),
+      Poem.genre_id.label("genre_id"),
+      Poem.prompt.label("prompt"),
+      Poem.title.label("title"),
+      Poem.image.label("image"),
+      Poem.content.label("content"),
+      Poem.note.label("note"),
+      Poem.created_at.label("created_at"),
+      User.id.label("user_id"),
+      User.username.label("user_name")
+    )
+    .join(Collection, Collection.poem_id == Poem.id)
+    .join(User, User.id == Poem.user_id)
+    .filter(Collection.user_id == current_user.id)
+    .all()
+  )
+
+  result = [
+    {
+      "user_id": item.user_id,
+      "genre_id": item.genre_id,
+      "user_name": item.user_name,
+      "prompt": item.prompt,
+      "title": item.title,
+      "image": item.image,
+      "content": item.content,
+      "note": item.note if item.note else "",
+      "created_at": item.created_at.strftime("%b %d · %I:%M %p")
+    }
+    for item in collections
+  ]
+
+  return result
+
+@router.get("/get-all", response_model=list[CollectionResponse])
+async def get_poem_in_collections(
+  db: Session = Depends(get_db)
+):
+  collections = (
+    db.query(
+      Poem.id.label("poem_id"),
+      Poem.genre_id.label("genre_id"),
+      Poem.prompt.label("prompt"),
+      Poem.title.label("title"),
+      Poem.image.label("image"),
+      Poem.content.label("content"),
+      Poem.note.label("note"),
+      Poem.created_at.label("created_at"),
+      User.id.label("user_id"),
+      User.username.label("user_name")
+    )
+    .join(Collection, Collection.poem_id == Poem.id)
+    .join(User, User.id == Poem.user_id)
+    .all()
+  )
+
+  result = [
+    {
+      "user_id": item.user_id,
+      "genre_id": item.genre_id,
+      "user_name": item.user_name,
+      "prompt": item.prompt,
+      "title": item.title,
+      "image": item.image,
+      "content": item.content,
+      "note": item.note if item.note else "",
+      "created_at": item.created_at.strftime("%b %d · %I:%M %p")
+    }
+    for item in collections
+  ]
+
+  return result

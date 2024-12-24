@@ -22,6 +22,7 @@ def create_poem(
     genre_id=poem_data.genre_id,
     prompt=poem_data.prompt,
     title=poem_data.title,
+    image=poem_data.image,
     content=poem_data.content,
     note=poem_data.note
   )

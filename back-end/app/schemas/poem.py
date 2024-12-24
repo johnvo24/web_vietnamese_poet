@@ -6,6 +6,7 @@ class PoemCreate(BaseModel):
   genre_id: int
   prompt: str
   title: str
+  image: str
   content: str
   note: Optional[str] = None
 
@@ -15,6 +16,7 @@ class PoemResponse(BaseModel):
   genre_id: int
   prompt: str
   title: str
+  image: str
   content: str
   note: Optional[str]
   created_at: datetime
