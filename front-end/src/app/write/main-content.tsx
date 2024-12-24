@@ -54,6 +54,18 @@ const MainContent = () => {
   const { user, loading } = useAuth()
   const router = useRouter()
 
+  const poemData = {
+    user_id: 1,
+    genre_id: 1,
+    user_name: "Johnny Dark",
+    prompt: "Thơ lục bát về tình yêu",
+    title: "Nhặt Tình Lục Bát",
+    image: "https://cdn.vectorstock.com/i/1000v/16/84/romantic-background-vector-27211684.jpg",
+    content: "Thương ai ngày tháng đợi chờ?\nCho ta say nhớ vần thơ nghĩa tình\nTừ ấy Lục Bát lung linh\nĐể Ta nhặt lấy cho mình chơi vơi!\nLục tình Bát nghĩa ai rơi?\nRồi gieo nhung nhớ cho đời thắm tươi\nTình yêu muôn sắc rạng ngời\nThơ tình Lục bát luôn cười đón em.\nLục bát…rơi chi… lệ mềm!\nCho mi em vướng… ái êm giọt tình\nNgày đêm nỗi nhớ riêng mình\nVần thơ Lục bát thắm in vào hồn.\nDù ai lý lẽ ngoan khôn!!!\nThơ ta Lục bát ru hồn mộng yêu\nSắc màu nắng ngã tím chiều\nVần thơ ta mãi Lục tình Bát thương…",
+    note: "",
+    created_at: "Dec 20 · 12:19 PM"
+  }
+
   const generatePoem = async () => {
     try {
       const response = await apiAI.post("/generate-poem", { model, prompt })
@@ -151,7 +163,7 @@ const MainContent = () => {
             <p className='w-full text-start text-lg mb-1 italic text-gray-700'>Preview:</p>
             <hr className="mt-1 mb-4 w-full border-dashed border-gray-300" />
             <div className="preview bg-gray-400 p-12">
-              <PostCard className={''} />
+              <PostCard className={''} poemData={poemData}/>
           </div>
         </div>
       </div>

@@ -2,13 +2,32 @@
 
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import { api } from '@/lib/utils'
+import React, { useState, useEffect } from 'react'
 import PostCard from "@/components/ui/post-card"
 import useAuth from '@/lib/hooks/useAuth'
 
 const MainContent = () => {
+  const [poems, setPoems] = useState<any[]>([])
   const { user, loading } = useAuth()
   const router = useRouter()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token")
+        const response = api.get("/collection/getById", {
+          headers: { Authorization: `Bearer ${token}`},
+        })
+        setPoems((await response).data)
+      } catch (error) {
+        alert(error)
+      }
+    }
+    if (user) {
+      fetchData()
+    }
+  }, [user])
 
   if (loading) {
     return (
@@ -30,12 +49,18 @@ const MainContent = () => {
   }
 
   return (
-    <div className='main pt-12 w-full'>
-      <div className="content mx-auto w-8/12 min-w-[960px] py-4">
-        <PostCard className='mb-4'/>
-        <PostCard className='mb-4'/>
-        <PostCard className='mb-4'/>
-      </div>
+    <div className="content mx-auto w-8/12 min-w-[960px] py-4">
+      {poems.length === 0 ? (
+        <p>No poems found.</p>
+        ) : (
+        poems.map(poem => (
+          <PostCard 
+            key={poem.id}
+            className='mb-4'
+            poemData={poem}
+          />
+        ))
+      )}
     </div>
   )
 }
