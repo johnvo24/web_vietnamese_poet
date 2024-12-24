@@ -63,6 +63,7 @@ async def get_poem_in_collections(
 
   result = [
     {
+      "poem_id": item.poem_id,
       "user_id": item.user_id,
       "genre_id": item.genre_id,
       "user_name": item.user_name,
@@ -102,6 +103,7 @@ async def get_poem_in_collections(
 
   result = [
     {
+      "poem_id": item.poem_id,
       "user_id": item.user_id,
       "genre_id": item.genre_id,
       "user_name": item.user_name,

@@ -26,6 +26,14 @@ const ShowPoem = () => {
     }
   }, [user])
 
+  if (loading) {
+    return (
+      <header className="flex justify-center p-4 shadow-md">
+        <span>Loading...</span>
+      </header>
+    )
+  }
+
   return (
     <>
       {poems.length === 0 ? (
@@ -33,7 +41,7 @@ const ShowPoem = () => {
         ) : (
           poems.map(poem => (
             <PostCard 
-              key={poem.id}
+              key={poem.poem_id}
               className='mb-4'
               poemData={poem}
             />

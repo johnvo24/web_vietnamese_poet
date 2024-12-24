@@ -47,7 +47,7 @@ const MainContent = () => {
       </div>
     )
   }
-
+  
   return (
     <div className="content mx-auto w-8/12 min-w-[960px] py-4">
       {poems.length === 0 ? (
@@ -55,7 +55,7 @@ const MainContent = () => {
         ) : (
         poems.map(poem => (
           <PostCard 
-            key={poem.id}
+            key={poem.poem_id}
             className='mb-4'
             poemData={poem}
           />
