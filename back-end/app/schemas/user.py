@@ -35,8 +35,8 @@ class UserUpdate(BaseModel):
     from_attributes = True
 
 class LoginRequest(BaseModel):
-    username: str
-    password: str
+  username: str
+  password: str
 
 class TokenResponse(BaseModel):
   access_token: str

@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { api } from "@/lib/utils"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 import React from 'react'
 
 const formSchema = z.object({
@@ -29,6 +31,13 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>
 
 const LoginForm = () => {
+  const router = useRouter()
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,13 +48,21 @@ const LoginForm = () => {
 
   async function onSubmit(values: FormValues) {
     try {
-      const response = await api.post("/auth/login", values)
+      const formData = new URLSearchParams()
+      formData.append("username", values.username)
+      formData.append("password", values.password)
+
+      const response = await api.post("/auth/login", formData, {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+      })
       localStorage.setItem("token", response.data.access_token)
-      // go to Wall
+      router.push('/')
     } catch (error) {
-      alert("Registration failed!")
+      alert("Username or Password wrong")
     }
   }
+
+  if (!isMounted) return <div>Loading...</div>
 
   return (
     <Form {...form}>

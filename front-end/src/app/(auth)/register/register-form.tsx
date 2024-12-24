@@ -17,10 +17,11 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { api } from "@/lib/utils"
+import { AxiosError } from "axios"
 import React from 'react'
 
 const formSchema = z.object({
-  fullname: z.string().max(100),
+  full_name: z.string().max(100),
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }).max(16),
@@ -36,7 +37,7 @@ const RegisterForm = () => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fullname: "",
+      full_name: "",
       username: "",
       email: "",
       password: "",
@@ -48,7 +49,9 @@ const RegisterForm = () => {
       const response = await api.post("/auth/register", values)
       alert("Registration successful!")
     } catch (error) {
-      alert("Registration failed!")
+      if (error instanceof AxiosError) {
+        alert(error.response?.data?.detail || "Registration failed")
+      }
     }
   }
 
@@ -57,7 +60,7 @@ const RegisterForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField 
           control={form.control}
-          name="fullname"
+          name="full_name"
           render={({ field }) => (
             <FormItem>
               <FormControl>
