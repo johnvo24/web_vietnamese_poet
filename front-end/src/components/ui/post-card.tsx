@@ -7,20 +7,20 @@ import { FaRegBookmark, FaRegHeart, FaRegShareSquare } from "react-icons/fa";
 import { PiShareFat } from "react-icons/pi";
 import { RiShareForwardLine } from "react-icons/ri";
 
-const PostCard = ({className}:{className: string}) => {
+const PostCard = ({ className, poemData }: { className: string, poemData: any }) => {
   const router = useRouter();
 
-  const poemData = {
-    userId: 1,
-    genreId: 1,
-    userName: "Johnny Dark",
-    prompt: "Thơ lục bát về tình yêu",
-    title: "Nhặt Tình Lục Bát",
-    image: "https://cdn.vectorstock.com/i/1000v/16/84/romantic-background-vector-27211684.jpg",
-    content: "Thương ai ngày tháng đợi chờ?\nCho ta say nhớ vần thơ nghĩa tình\nTừ ấy Lục Bát lung linh\nĐể Ta nhặt lấy cho mình chơi vơi!\nLục tình Bát nghĩa ai rơi?\nRồi gieo nhung nhớ cho đời thắm tươi\nTình yêu muôn sắc rạng ngời\nThơ tình Lục bát luôn cười đón em.\nLục bát…rơi chi… lệ mềm!\nCho mi em vướng… ái êm giọt tình\nNgày đêm nỗi nhớ riêng mình\nVần thơ Lục bát thắm in vào hồn.\nDù ai lý lẽ ngoan khôn!!!\nThơ ta Lục bát ru hồn mộng yêu\nSắc màu nắng ngã tím chiều\nVần thơ ta mãi Lục tình Bát thương…",
-    note: "",
-    createAt: "Dec 20 · 12:19 PM"
-  }
+  // const poemData = {
+  //   userId: 1,
+  //   genreId: 1,
+  //   userName: "Johnny Dark",
+  //   prompt: "Thơ lục bát về tình yêu",
+  //   title: "Nhặt Tình Lục Bát",
+  //   image: "https://cdn.vectorstock.com/i/1000v/16/84/romantic-background-vector-27211684.jpg",
+  //   content: "Thương ai ngày tháng đợi chờ?\nCho ta say nhớ vần thơ nghĩa tình\nTừ ấy Lục Bát lung linh\nĐể Ta nhặt lấy cho mình chơi vơi!\nLục tình Bát nghĩa ai rơi?\nRồi gieo nhung nhớ cho đời thắm tươi\nTình yêu muôn sắc rạng ngời\nThơ tình Lục bát luôn cười đón em.\nLục bát…rơi chi… lệ mềm!\nCho mi em vướng… ái êm giọt tình\nNgày đêm nỗi nhớ riêng mình\nVần thơ Lục bát thắm in vào hồn.\nDù ai lý lẽ ngoan khôn!!!\nThơ ta Lục bát ru hồn mộng yêu\nSắc màu nắng ngã tím chiều\nVần thơ ta mãi Lục tình Bát thương…",
+  //   note: "",
+  //   createAt: "Dec 20 · 12:19 PM"
+  // }
   
   return (
     <div className={`${className} post-card p-2 bg-white rounded-lg shadow-sm`}>
@@ -30,12 +30,12 @@ const PostCard = ({className}:{className: string}) => {
             id={'post-avatar'}
             className={"w-12 h-12 cursor-pointer mr-4"}
             src={"https://upload.wikimedia.org/wikipedia/commons/2/21/Johnny_Depp_2020.jpg"}
-            alt={"Johnny Dark"}
-            fallbackText={"JD"}
+            alt={poemData.user_name}
+            fallbackText={poemData.user_name.charAt(0)}
           />
           <div className="info-text">
-            <p className="username text-lg font-bold -mb-1">{poemData.userName}</p>
-            <p className="time text-gray-500 text-sm">{poemData.createAt}</p>
+            <p className="username text-lg font-bold -mb-1">{poemData.user_name}</p>
+            <p className="time text-gray-500 text-sm">{poemData.created_at}</p>
           </div>
         </div>
         <HiOutlineViewfinderCircle 

@@ -8,7 +8,9 @@ const page = () => {
       <Header 
         className="fixed top-0 left-0"
       />
-      <MainContent />
+      <div className='main pt-12 w-full'>
+        <MainContent />
+      </div>
     </div>
   )
 }
