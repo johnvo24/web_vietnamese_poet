@@ -1,8 +1,6 @@
-import { IoCopy } from "react-icons/io5"
-import { FaShare } from "react-icons/fa"
 import React from 'react'
 import Header from '@/components/header'
-import MainContent from "@/app/write/main-content"
+import MainContent from "@/app/collection/main-content"
 
 const page = () => {
   return (

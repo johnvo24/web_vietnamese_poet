@@ -24,3 +24,10 @@ def update_profile(
   db.commit()
   db.refresh(user)
   return user
+
+@router.get("/me", response_model=UserResponse)
+def get_all(
+  db: Session = Depends(get_db),
+  current_user: User = Depends(get_current_user)
+):
+  return current_user
