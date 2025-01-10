@@ -25,6 +25,31 @@ const PostCard = ({ className, poemData }: { className: string, poemData: any })
     }
   }
 
+  const handleSaveToDB = async () => {
+    const formData = {
+      genre_id: 1,
+      prompt: poemData.prompt,
+      title: poemData.title,
+      image: "https://cdn.vectorstock.com/i/1000v/16/84/romantic-background-vector-27211684.jpg",
+      content: poemData.content,
+      note: poemData.note || ""
+    }
+    try {
+      const token = localStorage.getItem("token")
+      const response = await api.post("/poem/create", JSON.stringify(formData), {
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+      console.log(response)
+      if (response != null) {
+        alert("Poem added to collection successfully")
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
   return (
     <div className={`${className} post-card p-2 bg-white rounded-lg shadow-sm`}>
       <div className="post-header flex justify-between p-2">
@@ -34,7 +59,7 @@ const PostCard = ({ className, poemData }: { className: string, poemData: any })
             className={"w-12 h-12 cursor-pointer mr-4"}
             src={"https://upload.wikimedia.org/wikipedia/commons/2/21/Johnny_Depp_2020.jpg"}
             alt={poemData.user_name}
-            fallbackText={poemData.user_name.charAt(0)}
+            fallbackText=""
           />
           <div className="info-text">
             <p className="username text-lg font-bold -mb-1">{poemData.user_name}</p>
@@ -50,7 +75,7 @@ const PostCard = ({ className, poemData }: { className: string, poemData: any })
       <div 
         className="p-6 text-center rounded-lg"
         style={{
-          backgroundImage: `url('${poemData.image}')`,
+          backgroundImage: `url('https://cdn.vectorstock.com/i/1000v/16/84/romantic-background-vector-27211684.jpg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           color: "#000",
@@ -68,7 +93,7 @@ const PostCard = ({ className, poemData }: { className: string, poemData: any })
         </button>
 
         {/* Nút Save */}
-        <button onClick={handleSaveToCol} className="action-btn flex flex-1 items-center justify-center space-x-2 hover:bg-gray-200 p-2 rounded-md">
+        <button onClick={handleSaveToDB} className="action-btn flex flex-1 items-center justify-center space-x-2 hover:bg-gray-200 p-2 rounded-md">
           <FaRegBookmark className="text-gray-600" size={20} />
           {/* <FaBookmark className="text-yellow-500" size={20} /> */}
           <span className="w-16 text-start text-gray-700 font-medium">45</span>

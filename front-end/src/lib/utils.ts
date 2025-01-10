@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge"
 import axios from "axios"
 
 const API_URL = "http://localhost:8000"
-const API_AI = "http://192.168.2.162:8000"
+const API_AI = "http://192.168.122.240:8000"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))

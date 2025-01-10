@@ -23,27 +23,21 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { apiAI } from '@/lib/utils'
+import axios from 'axios'
+import { stringify } from 'postcss'
 
 const frameworks = [
   {
-    value: "next.js",
-    label: "Next.js",
+    model: "phobert_gpt2",
+    label: "phobert_gpt2",
   },
   {
-    value: "sveltekit",
-    label: "SvelteKit",
+    model: "gemini-1.5-flash",
+    label: "gemini-1.5-flash",
   },
   {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
+    model: "claude-3-5-sonnet-20241022",
+    label: "claude-3-5-sonnet-20241022",
   },
 ]
 
@@ -51,6 +45,7 @@ const MainContent = () => {
   const [open, setOpen] = useState(false)
   const [model, setModel] = useState("")
   const [prompt, setPrompt] = useState("")
+  const [poem, setPoem] = useState("")
   const { user, loading } = useAuth()
   const router = useRouter()
 
@@ -66,9 +61,20 @@ const MainContent = () => {
     created_at: "Dec 20 · 12:19 PM"
   }
 
+
+
   const generatePoem = async () => {
     try {
-      const response = await apiAI.post("/generate-poem", { model, prompt })
+      const formData = {
+        model: model,
+        prompt: prompt
+      };
+      const response = await axios.post("http://172.20.10.2:8000/generate-poem", JSON.stringify(formData), {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      setPoem(response.data)
       console.log(response)
     } catch (error) {
       
@@ -119,7 +125,7 @@ const MainContent = () => {
                       size="lg"
                     >
                       {model
-                        ? frameworks.find((models) => models.value === model)?.label
+                        ? frameworks.find((models) => models.model === model)?.label
                         : "Select model..."}
                       <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
@@ -132,8 +138,8 @@ const MainContent = () => {
                         <CommandGroup>
                           {frameworks.map((models) => (
                             <CommandItem
-                              key={models.value}
-                              value={models.value}
+                              key={models.model}
+                              value={models.model}
                               onSelect={(currentValue) => {
                                 setModel(currentValue === model ? "" : currentValue)
                                 setOpen(false)
@@ -142,7 +148,7 @@ const MainContent = () => {
                               <Check
                                 className={cn(
                                   "mr-2 h-4 w-4",
-                                  model === models.value ? "opacity-100" : "opacity-0"
+                                  model === models.model ? "opacity-100" : "opacity-0"
                                 )}
                               />
                               {models.label}
@@ -155,7 +161,7 @@ const MainContent = () => {
                 </Popover>
               </div>
             </div>
-            <Button className='mt-4' type='submit' onClick={handlePrint}>
+            <Button className='mt-4' type='submit' onClick={generatePoem}>
               <RiAiGenerate/>Generate Poem
             </Button>
           </div>
@@ -163,7 +169,7 @@ const MainContent = () => {
             <p className='w-full text-start text-lg mb-1 italic text-gray-700'>Preview:</p>
             <hr className="mt-1 mb-4 w-full border-dashed border-gray-300" />
             <div className="preview bg-gray-400 p-12">
-              <PostCard className={''} poemData={poemData}/>
+              <PostCard className={''} poemData={poem}/>
           </div>
         </div>
       </div>
