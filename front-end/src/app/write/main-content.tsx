@@ -25,6 +25,7 @@ import {
 import { apiAI } from '@/lib/utils'
 import axios from 'axios'
 import { stringify } from 'postcss'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const frameworks = [
   {
@@ -69,13 +70,12 @@ const MainContent = () => {
         model: model,
         prompt: prompt
       };
-      const response = await axios.post("http://172.20.10.2:8000/generate-poem", JSON.stringify(formData), {
+      const response = await axios.post("http://172.16.0.180:8000/generate-poem", JSON.stringify(formData), {
         headers: {
           'Content-Type': 'application/json'
         },
       })
       setPoem(response.data)
-      console.log(response)
     } catch (error) {
       
     }
@@ -83,9 +83,7 @@ const MainContent = () => {
 
   if (loading) {
     return (
-      <header className="flex justify-center p-4 shadow-md">
-        <span>Loading...</span>
-      </header>
+      <Skeleton className='w-8/12 h-96 mx-auto mt-16'/>
     )
   }
 

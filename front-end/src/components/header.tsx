@@ -7,6 +7,7 @@ import { FaRegUser } from "react-icons/fa";
 import { MdOutlineLogout, MdOutlineSettings } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface HeaderProps {
   className?: string;
@@ -65,6 +66,12 @@ const Header: React.FC<HeaderProps> = ( { className } ) => {
             </Menubar.Trigger>
             <Menubar.Trigger 
               className="px-4 py-2 hover:bg-gray-200"
+              onClick={() => router.push('/edit')}
+              >
+                Edit
+            </Menubar.Trigger>
+            <Menubar.Trigger 
+              className="px-4 py-2 hover:bg-gray-200"
               onClick={() => router.push('/collection')}
               >
                 Collection
@@ -80,7 +87,9 @@ const Header: React.FC<HeaderProps> = ( { className } ) => {
       </div>
       <div className="user_box w-24 inline-flex items-center justify-end pr-4">
         { loading ? (
-          <div>Loading...</div>
+          <div>
+            <Skeleton className="w-9 h-9 rounded-full"/>
+          </div>
         ): (
           <>
             { user ? (

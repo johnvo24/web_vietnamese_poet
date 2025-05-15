@@ -2,6 +2,7 @@
 
 import { api } from '@/lib/utils'
 import React, { useState, useEffect } from 'react'
+import { Skeleton } from '@/components/ui/skeleton'
 import useAuth from '@/lib/hooks/useAuth'
 import PostCard from '@/components/ui/post-card'
 
@@ -28,9 +29,10 @@ const ShowPoem = () => {
 
   if (loading) {
     return (
-      <header className="flex justify-center p-4 shadow-md">
-        <span>Loading...</span>
-      </header>
+      <div className='flex flex-col space-y-4'>
+        <Skeleton className='w-full h-60'/>
+        <Skeleton className='w-full h-10'/>
+      </div>
     )
   }
 
