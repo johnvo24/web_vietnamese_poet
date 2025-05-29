@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = ( { className } ) => {
   }
 
   return (
-    <div className={`${className} header flex w-full justify-between bg-background shadow-sm z-10`}>
+    <div className={`${className} header flex w-full justify-between bg-background shadow-md z-10`}>
       <div className="logo_box w-24">
         <p className="logo-text h-full font-bold content-center text-lg text-center tracking-widest">VIPOE</p>
       </div>
@@ -53,31 +53,31 @@ const Header: React.FC<HeaderProps> = ( { className } ) => {
         <Menubar.Root className="flex p-1">
           <Menubar.Menu>
             <Menubar.Trigger 
-              className="px-4 py-2 hover:bg-gray-200"
+              className="px-4 py-2 hover:bg-gray-200 hover:rounded-md"
               onClick={() => router.push('/')}
               >
                 Wall
             </Menubar.Trigger>
             <Menubar.Trigger 
-              className="px-4 py-2 hover:bg-gray-200"
+              className="px-4 py-2 hover:bg-gray-200 hover:rounded-md"
               onClick={() => router.push('/write')}
               >
                 Write
             </Menubar.Trigger>
             <Menubar.Trigger 
-              className="px-4 py-2 hover:bg-gray-200"
+              className="px-4 py-2 hover:bg-gray-200 hover:rounded-md"
               onClick={() => router.push('/edit')}
               >
                 Edit
             </Menubar.Trigger>
             <Menubar.Trigger 
-              className="px-4 py-2 hover:bg-gray-200"
+              className="px-4 py-2 hover:bg-gray-200 hover:rounded-md"
               onClick={() => router.push('/collection')}
               >
                 Collection
             </Menubar.Trigger>
             <Menubar.Trigger 
-              className="px-4 py-2 hover:bg-gray-200"
+              className="px-4 py-2 hover:bg-gray-200 hover:rounded-md"
               onClick={() => router.push('/support')}
               >
                 Support
@@ -110,21 +110,21 @@ const Header: React.FC<HeaderProps> = ( { className } ) => {
                   >
                     <Menubar.Menu>
                       <Menubar.Trigger 
-                        className="w-full inline-flex items-center text-start px-2 py-2 hover:bg-gray-200"
+                        className="w-full inline-flex items-center text-start px-2 py-2 hover:bg-gray-200 hover:rounded-md"
                         onClick={() => router.push('/profile')}
                       >
                         <FaRegUser size={18} className="mr-4"/>
                         Profile
                       </Menubar.Trigger>
                       <Menubar.Trigger 
-                        className="w-full inline-flex items-center text-start px-2 py-2 hover:bg-gray-200"
+                        className="w-full inline-flex items-center text-start px-2 py-2 hover:bg-gray-200 hover:rounded-md"
                         onClick={() => router.push('/settings')}
                       >
                         <MdOutlineSettings size={22} className="mr-3.5 -ml-0.5"/>
                         Settings
                       </Menubar.Trigger>
                       <Menubar.Trigger 
-                        className="w-full inline-flex items-center text-start px-2 py-2 hover:bg-gray-200"
+                        className="w-full inline-flex items-center text-start px-2 py-2 hover:bg-gray-200 hover:rounded-md"
                         onClick={handleLogout}
                       >
                         <MdOutlineLogout size={22} className="mr-3"/>
