@@ -51,7 +51,7 @@ const PostCard = ({ className, poemData }: { className: string, poemData: any })
     }
   }
   return (
-    <div className={`${className} post-card p-2 bg-white rounded-lg shadow-sm`}>
+    <div className={`${className} post-card p-2 bg-white rounded-lg shadow-md`}>
       <div className="post-header flex justify-between p-2">
         <div className="info-box flex">
           <UserAvatar 
@@ -75,34 +75,34 @@ const PostCard = ({ className, poemData }: { className: string, poemData: any })
       <div 
         className="p-6 text-center rounded-lg"
         style={{
-          backgroundImage: `url('https://cdn.vectorstock.com/i/1000v/16/84/romantic-background-vector-27211684.jpg')`,
+          backgroundImage: `url('${poemData.image}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           color: "#000",
         }}
       >
-        <p className="post-title text-xl font-bold mb-2">{poemData.title}</p>
-        <p className="text-base whitespace-pre-wrap">{`${poemData.content}`}</p>
+        <p className="post-title text-xl font-bold mb-2 text-white">{poemData.title}</p>
+        <p className="text-base whitespace-pre-wrap text-white">{`${poemData.content}`}</p>
       </div>
       <div className="interaction-box flex mt-2 rounded-lg border">
         {/* Nút Like */}
         <button className="action-btn flex flex-1 items-center justify-center space-x-2 hover:bg-gray-200 p-2 rounded-md">
           <FaRegHeart className="text-gray-600" size={20} />
           {/* <FaHeart className="text-red-500" size={20} /> */}
-          <span className="w-16 text-start text-gray-700 font-medium">120</span>
+          <span className="w-auto text-gray-700 font-medium">120</span>
         </button>
 
         {/* Nút Save */}
         <button onClick={handleSaveToDB} className="action-btn flex flex-1 items-center justify-center space-x-2 hover:bg-gray-200 p-2 rounded-md">
           <FaRegBookmark className="text-gray-600" size={20} />
           {/* <FaBookmark className="text-yellow-500" size={20} /> */}
-          <span className="w-16 text-start text-gray-700 font-medium">45</span>
+          <span className="w-auto text-gray-700 font-medium">455</span>
         </button>
 
         {/* Nút Share */}
         <button className="action-btn flex flex-1 items-center justify-center space-x-2 hover:bg-gray-200 p-2 rounded-md">
           <FaRegShareSquare className="text-gray-600" size={21} />
-          <span className="text-start text-gray-700 font-medium">Share</span>
+          <span className="w-auto text-gray-700 font-medium">Share</span>
         </button>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { FaUser } from "react-icons/fa"
-import { TbPassword } from "react-icons/tb"
+import { FaLock } from "react-icons/fa"
 import {
   Form,
   FormControl,
@@ -17,7 +17,6 @@ import { Input } from "@/components/ui/input"
 import { api } from "@/lib/utils"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import React from 'react'
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -66,7 +65,7 @@ const LoginForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField 
           control={form.control}
           name="username"
@@ -85,7 +84,7 @@ const LoginForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input type="password" placeholder="Enter password" icon={<TbPassword/>} {...field} />
+                <Input type="password" placeholder="Enter password" icon={<FaLock/>} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

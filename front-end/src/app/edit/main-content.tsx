@@ -12,11 +12,12 @@ import EditedPoemMessage from '@/components/edited_poem'
 import axios from 'axios'
 
 interface Step {
-  step_content: string
+  error_poem: string,
+  step_content: string,
+  edited_poem: string,
   reasoning_score: number,
-  poem_text: string,
-  meaning_score: number,
-  imagery_score: number
+  meaning_score: boolean,
+  imagery_score: boolean
 }
 
 interface Chain {
@@ -24,14 +25,18 @@ interface Chain {
   steps: Step[]
 }
 
+type ReasonResponse = {
+  status: string
+  error_poem: string
+  step_content: string
+  edited_poem: string
+}
+
 const MainContent = () => {
   const [chain, setChain] = useState<Chain | null>(null)
   const [messages, setMessages] = useState<string[]>([])
-  const [response, setResponse] = useState({
-    status: '',
-    step_content: '',
-    poem_text: '',
-  })
+  const [response, setResponse] = useState<ReasonResponse[]>([])
+  const [loadingResponse, setLoadingResponse] = useState(false)
 
   const hasMessages = messages.length > 0
   const lastStep = chain?.steps?.[chain.steps.length - 1]
@@ -49,23 +54,20 @@ const MainContent = () => {
 
     setMessages([text])
     setChain(newChain)
+    setLoadingResponse(true)
     
     try {
-      // const res = await axios.post("/edit-poem/step/", newChain)
-      // response sample
-      const res = {
-        "status": "ok",
-        "step_content": "string <eois>",
-        "poem_text": "string"
-      }
-      setResponse(res)
+      const res = await axios.post("https://22fe-34-143-144-92.ngrok-free.app/edit-poem/step/", newChain)
+
+      setResponse(prev => [...prev, res.data])
 
       const step = {
-        "step_content": "string <eois>",
-        "reasoning_score": 4,
-        "poem_text": "string",
-        "meaning_score": 4,
-        "imagery_score": 4
+        "error_poem": res.data.error_poem,
+        "step_content": res.data.step_content,
+        "edited_poem": res.data.edited_poem,
+        "reasoning_score": 0,
+        "meaning_score": true,
+        "imagery_score": true,
       }
 
       // lưu step vào steps[]
@@ -75,30 +77,31 @@ const MainContent = () => {
       }))
     } catch (err) {
       console.error("Gửi API lỗi:", err)
+    } finally {
+      setLoadingResponse(false)
     }
   }
+  console.log(response)
   console.log(chain)
-
   // các lần bấm sau
   const handleNextStep = async () => {
     if (!chain || isComplete) return
 
+    setLoadingResponse(true)
+
     try {
-      // const res = await axios.post("/edit-poem/step/", chain)
+      const res = await axios.post("https://22fe-34-143-144-92.ngrok-free.app/edit-poem/step/", chain)
+
       // response sample
-      const res = {
-        "status": "ok",
-        "step_content": "string <eois>",
-        "poem_text": "string"
-      }
-      setResponse(res)
+      setResponse(prev => [...prev, res.data])
 
       const step = {
-        "step_content": "string <eos>",
-        "reasoning_score": 4,
-        "poem_text": "string",
-        "meaning_score": 4,
-        "imagery_score": 4
+        "error_poem": res.data.error_poem,
+        "step_content": res.data.step_content,
+        "edited_poem": res.data.edited_poem,
+        "reasoning_score": 0,
+        "meaning_score": true,
+        "imagery_score": true,
       }
 
       // lưu step vào steps[]
@@ -108,12 +111,16 @@ const MainContent = () => {
       }))
     } catch (err) {
       console.error("Lỗi khi gửi bước tiếp theo:", err)
+    } finally {
+      setLoadingResponse(false)
     }
   }
 
   if (loading) {
     return (
-      <Skeleton className='w-full h-40'/>
+      <div className='main w-full h-screen flex items-center justify-center'>
+        <Skeleton className='w-full max-w-xl m-auto h-[74px] rounded-full'/>
+      </div>
     )
   }
 
@@ -135,9 +142,10 @@ const MainContent = () => {
           <UserMessage key={`user-${idx}`} content={msg} />
         ))}
 
-        {response.step_content != '' && (
-          <AIMessage content={response.step_content} />
-        )}
+        {response.map((res, index) => (
+          <AIMessage key={index} content={res.step_content} />
+        ))}
+        {loadingResponse && <Skeleton className="w-2/4 h-20" />}
 
         {!isComplete && chain && (
           <button
