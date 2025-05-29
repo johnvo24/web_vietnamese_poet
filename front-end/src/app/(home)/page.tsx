@@ -27,7 +27,7 @@ export default function Home() {
           </div>
           <div className="right-content w-1/4">
             {/* <PostCard className="mb-4"/> */}
-            <div className="p-4 rounded-lg shadow-sm bg-white mb-2">
+            <div className="p-4 rounded-lg shadow-md bg-white mb-2">
               <p className="font-bold text-lg mb-2">Themes & Topics</p>
               <Link 
                 className="text-sm py-1 px-2 mb-1 w-fit hover:underline block text-gray-700 bg-gray-200 rounded-lg" 

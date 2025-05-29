@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { api } from '@/lib/utils'
 import React, { useState, useEffect } from 'react'
+import { Skeleton } from '@/components/ui/skeleton'
 import PostCard from "@/components/ui/post-card"
 import useAuth from '@/lib/hooks/useAuth'
 
@@ -31,9 +32,10 @@ const MainContent = () => {
 
   if (loading) {
     return (
-      <header className="flex justify-center p-4 shadow-md">
-        <span>Loading...</span>
-      </header>
+      <div className='content mx-auto w-8/12 min-w-[960px] py-4'>
+        <Skeleton className='h-52'/>
+        <Skeleton className='h-52 mt-4'/>
+      </div>
     )
   }
 
