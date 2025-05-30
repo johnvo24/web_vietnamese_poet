@@ -89,14 +89,14 @@ const PostCard = ({ className, poemData }: { className: string, poemData: any })
         <button className="action-btn flex flex-1 items-center justify-center space-x-2 hover:bg-gray-200 p-2 rounded-md">
           <FaRegHeart className="text-gray-600" size={20} />
           {/* <FaHeart className="text-red-500" size={20} /> */}
-          <span className="w-auto text-gray-700 font-medium">120</span>
+          <span className="w-auto text-gray-700 font-medium">???</span>
         </button>
 
         {/* Nút Save */}
         <button onClick={handleSaveToDB} className="action-btn flex flex-1 items-center justify-center space-x-2 hover:bg-gray-200 p-2 rounded-md">
           <FaRegBookmark className="text-gray-600" size={20} />
           {/* <FaBookmark className="text-yellow-500" size={20} /> */}
-          <span className="w-auto text-gray-700 font-medium">455</span>
+          <span className="w-auto text-gray-700 font-medium">???</span>
         </button>
 
         {/* Nút Share */}

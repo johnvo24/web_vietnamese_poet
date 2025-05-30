@@ -57,7 +57,7 @@ const MainContent = () => {
     setLoadingResponse(true)
     
     try {
-      const res = await axios.post("https://22fe-34-143-144-92.ngrok-free.app/edit-poem/step/", newChain)
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_AI_API_BASE_URL}/edit-poem/step/`, newChain)
 
       setResponse(prev => [...prev, res.data])
 
@@ -76,7 +76,6 @@ const MainContent = () => {
         steps: [...prev!.steps, step]
       }))
     } catch (err) {
-      console.error("Gửi API lỗi:", err)
     } finally {
       setLoadingResponse(false)
     }
@@ -90,7 +89,7 @@ const MainContent = () => {
     setLoadingResponse(true)
 
     try {
-      const res = await axios.post("https://22fe-34-143-144-92.ngrok-free.app/edit-poem/step/", chain)
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_AI_API_BASE_URL}/edit-poem/step/`, chain)
 
       // response sample
       setResponse(prev => [...prev, res.data])
