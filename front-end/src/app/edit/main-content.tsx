@@ -155,7 +155,9 @@ const MainContent = () => {
             {loading ? "Đang xử lý..." : "Tiếp tục"}
           </button>
         )}
-        {/* <EditedPoemMessage /> */}
+        {isComplete && chain && (
+          <EditedPoemMessage content={chain.steps[chain.steps.length - 1].edited_poem}/>
+        )}
         
         <InputForm onSend={handleSend} isCentered={!hasMessages} />
       </div>

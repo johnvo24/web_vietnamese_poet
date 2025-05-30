@@ -1,5 +1,6 @@
 "use client"
 
+import { log } from "console"
 import { BiSolidCopy } from "react-icons/bi"
 
 const starts = [
@@ -10,7 +11,7 @@ const starts = [
   { label: "IE", tooltip: "Lỗi hình ảnh" },
 ]
 
-const EditedPoemMessage = () => {
+const EditedPoemMessage = ({ content }: { content: string }) => {
   return (
     <div className='flex flex-col items-start space-y-1 group'>
       <div className="bg-[#e9e9e980] text-base px-2 py-2 leading-relaxed rounded-lg w-auto">
@@ -21,8 +22,7 @@ const EditedPoemMessage = () => {
           </button>
         </div>
         <div className="text-center mt-2 px-2">
-          <p>Trăm năm trong cõi người ta,</p>
-          <p>Chữ tài chữ mệnh khéo là ghét nhau.</p>
+          <p className="whitespace-pre-line">{content}</p>
         </div>
       </div>
       <div className="flex flex-row items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
