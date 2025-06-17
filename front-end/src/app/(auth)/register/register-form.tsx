@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { FaUser } from "react-icons/fa"
-import { TbPassword } from "react-icons/tb"
+import { FaLock } from "react-icons/fa"
 import { MdEmail } from "react-icons/md"
 import { FaAddressCard } from "react-icons/fa"
 import {
@@ -57,7 +57,7 @@ const RegisterForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField 
           control={form.control}
           name="full_name"
@@ -100,7 +100,7 @@ const RegisterForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input type="password" placeholder="Enter password" icon={<TbPassword/>} {...field} />
+                <Input type="password" placeholder="Enter password" icon={<FaLock/>} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

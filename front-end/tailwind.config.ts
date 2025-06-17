@@ -16,7 +16,8 @@ export default {
 				xl: "20px",
 			},
 			backgroundImage: {
-				backgroundRegister: "url('/images/bg-img-register.jpg')",
+				backgroundAuth: "url('/images/bg-img-register.jpg')",
+				backgroundAuth2: "url('/images/bg-img-register.jpg')",
 			},
   		colors: {
   			background: 'hsl(var(--background))',
